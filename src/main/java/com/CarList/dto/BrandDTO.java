@@ -16,5 +16,5 @@ public class BrandDTO {
 	
 	private Long id;
 	private String name;
-	private List<ModelDTO> models = new ArrayList<>();
+	private List<ModelDTO> models;
 }

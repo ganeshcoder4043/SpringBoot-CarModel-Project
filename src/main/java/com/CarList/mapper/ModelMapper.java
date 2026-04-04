@@ -19,7 +19,6 @@ public class ModelMapper {
 	// DTO To Entity
 	public static Model toModelEntity(ModelDTO modelDTO, Brand brand) {
 		Model model = new Model();
-		model.setId(modelDTO.getId());
 		model.setName(modelDTO.getName());
 		model.setDescription(modelDTO.getDescription());
 		model.setPrice(modelDTO.getPrice());

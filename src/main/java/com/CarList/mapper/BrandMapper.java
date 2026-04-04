@@ -5,7 +5,7 @@ import com.CarList.entity.Brand;
 
 public class BrandMapper {
 
-	public static BrandDTO toCreateDTO(Brand brand) {
+	public static BrandDTO toBrandDTO(Brand brand) {
 		if(brand == null) {
 			return null;
 		}
