@@ -8,6 +8,7 @@ import com.CarList.dto.BrandDTO;
 import com.CarList.dto.ModelDTO;
 import com.CarList.entity.Brand;
 import com.CarList.entity.Model;
+import com.CarList.exception.BrandNotFoundException;
 import com.CarList.mapper.BrandMapper;
 import com.CarList.mapper.ModelMapper;
 import com.CarList.repository.BrandRepository;
@@ -26,7 +27,8 @@ public class ModelService {
 	public ModelDTO createModel(ModelDTO modelDTO) {
 		// check brand have ya not
 		Brand brand =brandRepository.findById(modelDTO.getBrandId())
-		.orElseThrow(() -> new RuntimeException("Brand Not Found!!!!"));
+		.orElseThrow(() -> new BrandNotFoundException("Brand "+modelDTO.getBrandId()+" Not Found!!!!"));
+		
 		// DTO to Entity
 		Model model = ModelMapper.toModelEntity(modelDTO, brand );
 		modelRepository.save(model); // save in db

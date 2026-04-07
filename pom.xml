@@ -51,6 +51,13 @@
 			<scope>runtime</scope>
 		</dependency>-->
 		
+		<!--Swagger dependency for api-->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.8.16</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>

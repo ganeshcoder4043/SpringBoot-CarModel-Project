@@ -1,12 +1,14 @@
 package com.CarList.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.CarList.dto.BrandDTO;
 import com.CarList.dto.ModelDTO;
 import com.CarList.entity.Brand;
+import com.CarList.exception.BrandAlreadyExistsException;
 import com.CarList.mapper.BrandMapper;
 import com.CarList.mapper.ModelMapper;
 import com.CarList.repository.BrandRepository;
@@ -21,6 +23,11 @@ public class BrandService {
 	
 	// Create Brand
 	public BrandDTO createBrand(BrandDTO brandDTO) {
+		Optional<Brand> optionalBrand = brandRepository.findByName(brandDTO.getName());
+		if (optionalBrand.isPresent()) {
+			throw new BrandAlreadyExistsException("Brand "
+		+ brandDTO.getName()+" Already Exists");}
+		
 		Brand brand = BrandMapper.toBrandEntity(brandDTO); // DTO to Entity
 		Brand save = brandRepository.save(brand); // db Save 
 		return BrandMapper.toBrandDTO(brand); // Entity to DTO
