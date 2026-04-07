@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +44,7 @@ public class BrandController {
 	            summary = "Create new Brand",
 	            description = "Create a new Brand by providing brand details in request body"
 	    )
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@PostMapping
 	public ResponseEntity<BrandDTO> createBrand(@RequestBody BrandDTO brandDTO) {
 		return new ResponseEntity<> (brandService.createBrand(brandDTO),HttpStatus.CREATED);
@@ -72,6 +74,7 @@ public class BrandController {
 	 @Operation(
 	            summary = "Delete brand",
 	            description = "Delete brand from database using brand ID")
+	 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@DeleteMapping("/{id}")
 	public String deleteBrand(@PathVariable Long id) {
 		return brandService.deleteBrand(id); 

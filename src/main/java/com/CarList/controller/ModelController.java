@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +42,8 @@ public class ModelController {
             summary = "Create new model",
             description = "Create a new model by providing model details in request body"
     )
+	@PreAuthorize("hasAuthority('ROLE_SELLER')")  // for Single Role
+//  @PreAuthorize("hasAnyRole('SELLER','ADMIN')") // for both role
 	@PostMapping                                //  ↓  JSON to Java Object
 	public  ResponseEntity<ModelDTO> createModel(@RequestBody ModelDTO modelDTO) {
 		return new ResponseEntity<>(modelService.createModel(modelDTO), HttpStatus.CREATED);
@@ -67,6 +70,7 @@ public class ModelController {
 	}
 	
 	 // update by id
+	 @PreAuthorize("hasAuthority('ROLE_SELLER')")
 	@PutMapping("/{id}")
 	@Operation(
             summary = "Update model",
@@ -81,6 +85,7 @@ public class ModelController {
 	            summary = "Delete model",
 	            description = "Delete model from database using model ID"
 	    )
+	 @PreAuthorize("hasAuthority('ROLE_SELLER')")
 	@DeleteMapping("/{id}")
 	public String deleteModel(@PathVariable Long id) {
 		return modelService.deleteModel(id);
