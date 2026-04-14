@@ -128,6 +128,7 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable()) //// disable for post , update delete without token allow
                 .authorizeHttpRequests(request ->{  //authorizeHttpRequests -> kaun sa request allow and deny
                     request.requestMatchers(HttpMethod.GET, "/api/**").permitAll(); // all get request allowed
+                    request.requestMatchers("/actuator/**").permitAll();
                     request.anyRequest().authenticated(); // get request ke alva sari request authenticate ho gya hai
                 }).oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt
